@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <script src= "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <title>Reservación</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.3/examples/checkout/form-validation.css" rel="stylesheet">
+  </head>
+  <body style="background-image:url(fondo.jpg);background-size: cover">
+        <div class="container">
+            <h1 style="color: white;margin-left: 30px;font-style: italic">Reservación</h1>
+        </div>
+        <div style="margin-left: 287px; margin-top: 50px"> 
+            <button class="btn btn-light">Volver</button>
+        </div>
+        <div class="container" style="background-position: center;background-color: rgba(204, 204, 204, 0.89)">
+            <div style="margin-top: 10px" ng-show = "listaVuelos">
+                <h3 style="color: white;background-color: #168a20">Información de vuelos disponibles</h3>
+                <table class="table table-striped">
+                    <tr>
+                        <th>Aerolinea</th>
+                        <th>Aeropuerto de salida</th>
+                        <th>Aeropuerto de llegada</th>
+                        <th>Escalas/Tiempo</th>
+                        <th>Fecha y hora de salida</th>
+                        <th>fecha y hora de llegada</th>
+                        <th>Acción</th>
+
+                    </tr>
+                    <tr>
+                        <th >Copa Airlines</th>
+                        <th>Juan Santa María,SJ,Costa Rica</th>
+                        <th>Fortaleza,Ceara,Brazil</th>
+                        <th></th>
+                        <th>vie,abr 26, 7:40 PM</th>
+                        <th> sab,abr 27, 9:00 PM</th>
+                        <th><button class="btn btn-dark">Seleccionar</button></th>
+                    </tr>
+                    <tr>
+                        <th >Copa Airlines</th>
+                        <th>Juan Santa María,SJ,Costa Rica</th>
+                        <th>Fortaleza,Ceara,Brazil</th>
+                        <th></th>
+                        <th>vie,abr 26, 7:40 PM</th>
+                        <th> sab,abr 27, 9:00 PM</th>
+                        <th><button class="btn btn-dark">Seleccionar</button></th>
+                    </tr>
+                </table>
+            </div>
+            <div ng-show = "reservacion">
+                <h3 style="color: white;background-color: #168a20">Información Necesaria</h3>
+                <div class="row">
+                    <div class="col">
+                        <label for="tickets"># de tiquetes:</label>
+                        <input type="number" mg-model = "reservation.tickets" min = 0 required>
+                    </div>
+                    <div class="col">
+                        <select class="btn btn-secondary" name="typeTicket" id="type" ng-model = "reservation.ticketType">
+                            <option value="clase ejecutiva">Clase Ejecutiva</option>
+                            <option value="clase economica">Clase Económica</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label for="suitcases">Maletas:</label>
+                        <input type="number" ng-model = "reservation.suitcases" min="0" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="price">Identificación:</label>
+                        <input type="text" pattern="[0-9]{9}" placeholder="123456789" require ng-model = "reservation.clienID">
+                    </div>
+                    <div class="col">
+                        <label for="IdFlight">ID: vuelo</label>
+                        <label>{{reservation.flightId}}</label>
+                    </div>
+                    <div class="col">
+                        <label for="price">Precio Total:</label>
+                        <label>{{reservation.price}}</label>
+                    </div>
+                </div>
+                <div>
+                    <h3>Información del vuelo</h3>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="salida">Salida de: </label>
+                        <label>{{flight.airportOut}}</label>
+                    </div>
+                    <div class="col">
+                        <label>Fecha y hora: </label>
+                        <label>{{flight.date&hour}}</label>
+                    </div>
+                    <div class="col">
+                        <label>Destino: </label>
+                        <label>{{flight.AirportIn}}</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label>Escalas: </label>
+                        <label>{{flight.airportIntermediate}}</label>
+                    </div>
+                    <div class="col">
+                        <label>Avión: </label>
+                        <label>{{Airplane.type}}</label>
+                    </div>
+                    <div class="col">
+                        <label>piloto: </label>
+                        <label>{{Airplane.pilot}}</label>
+                    </div>
+                </div>
+                <button class="btn btn-primary">Siguiente</button>
+            </div>
+            <div ng-show = "Pago">
+                <h3 style="color: white;background-color: #168a20">Información De Pago</h3>
+                <div class="row">        
+                    <div class="col">
+                        <label>Cantidad de Tiquetes:</label>
+                        <label>{{reservation.ticketsCount}}</label>
+                    </div>
+                    <div class="col">
+                        <label>Tipo de tiquete:</label>
+                        <label>{{reservation.ticketType}}</label>
+                    </div>
+                    <div class="col">
+                        <label>Precio por Ticket:</label>
+                        <label>{{reservation.ticketPrice}}</label>
+                    </div> 
+                    <div class="col">
+                        <label>Total a pagar:</label>
+                        <label>{{reservation.price}}</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label>Método de Pago:</label>
+                    </div>
+                    <div class="col">
+                        <input type="radio">Mastercard
+                    </div>
+                    <div class="col">
+                        <input type="radio">Visa
+                    </div>
+                </div>
+                <label>Datos de Tarjeta:</label>
+                <div class="row">
+                    <div class="col">
+                        <label>Nombre:</label>
+                        <input type="text" required size="30px">
+                    </div>
+                    <div class="col">
+                        <label>Número de tarjeta:</label>
+                        <input type="text" style="text-align: center" required placeholder="1234567898745632" pattern="[0-9]{16}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label>Vencimiento:</label>
+                        <input type="month" required >
+                    </div>
+                    <div class="col">
+                        <label>CVV:</label>
+                        <input type="text" style="text-align: center"  placeholder="CVV" size="30px" pattern="[0-9]{3}" required>
+                    </div>
+                </div>
+                <button class="btn btn-primary">Finalizar</button>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> 
+  </body>
+  
+</html>
